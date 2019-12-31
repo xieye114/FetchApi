@@ -1,12 +1,14 @@
 {
     "name": "yyy/fetchapi",
     "description": "public library for fetch api",
-    "type": "library",
+    "type": "laravel-package",
     "require": {
         "php": ">=7.1",
-        "guzzlehttp/guzzle" : "~1.3"
+        "guzzlehttp/guzzle" : "*"
     },
-   
+    "require-dev": {
+        "orchestra/testbench": "^3.5"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -20,4 +22,5 @@
             "YYY\\FetchApi\\Pay\\": "src/"
         }
     }
+
 }
