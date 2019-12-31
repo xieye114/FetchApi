@@ -14,8 +14,7 @@ interface InterfaceApi
     public function is_valid():bool; // 校验抓取结果是否正确。
     public function init(); // 初始化对象
 
-// 假表示失败。其余表示成功,这是获取最终结果的通用方法。
-    // 统一使用 xxx->get() !== false 这样来判断。
+     // 实际中，为了使用方便，这个接口不确定返回值，由每个实现类自己处理。
     public function get();
 }
 

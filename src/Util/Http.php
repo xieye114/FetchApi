@@ -8,21 +8,30 @@
 
 namespace YYY\FetchApi\Pay\Util;
 
-
+use GuzzleHttp\Client;
 class Http
 {
-    public static function do_post($url, $params, $headers)
+
+    public static function http_post( $url, array $params = [], array $headers=[], $timeout=10 )
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
+        $client = new Client(['verify' => false]);
+        try {
+            $arr = [
+                'form_params' => $params,// 表单数据
+                'timeout'     => $timeout,// 单位是秒,0无限等待。
+            ] ;
+            if ($headers) {
+                $arr['headers'] = $headers;
+            }
+            $res = $client->request( 'POST', $url, $arr );
+
+        } catch ( \Exception $e ) {
+            logger()->error($e->getMessage());
+            logger()->error( 'post err：' . $url.
+                json_encode( $params, JSON_UNESCAPED_UNICODE ) );
+            return '';
+        }
+        return $res->getBody()->getContents();
     }
 
 }

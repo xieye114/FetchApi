@@ -12,6 +12,7 @@ use YYY\FetchApi\Pay\MyInterface\InterfaceEvent;
 use YYY\FetchApi\Pay\MyInterface\InterfacePay;
 use YYY\FetchApi\Pay\MyTrait\Err;
 use YYY\FetchApi\Pay\MyTrait\TraitEvent;
+use YYY\FetchApi\Pay\Util\Http;
 use YYY\FetchApi\Pay\Util\Md5Util;
 use YYY\FetchApi\Pay\Util\RSA;
 use YYY\FetchApi\Pay\Util\Security;
@@ -114,13 +115,13 @@ class Api implements InterfacePay, InterfaceEvent
             "Accept" => "application/json;charset=utf-8"
         ];
 
-        //计算金额
-        $orderRate = config('my.api_pay_daikou_settle_rate'); // 费率
-        $settleCharge_fen = config('my.api_pay_daikou_settle_charge'); // 手续费，单位分
+
+        $orderRate = config('my.api_pay_daikou_settle_rate');
+        $settleCharge_fen = config('my.api_pay_daikou_settle_charge'); // 单位分
 
         $amount_yuan = $this->amount;
         $settleAmount = $amount_yuan * 100 - ($amount_yuan * 100 * $orderRate / 100) - $settleCharge_fen;
-        // 计算并保存 结算金额，分。
+        // 计算并保存 分。
         $settleAmount = intval($settleAmount);
 
         $this->dataPay
@@ -136,7 +137,7 @@ class Api implements InterfacePay, InterfaceEvent
     }
 
     // 实现 请求接口。
-    public function set_request(DataPay $dataPay, $amount)
+    public function set_request(RequestData $dataPay, $amount)
     {
         $this->dataPay = $dataPay;
         $this->amount = $amount;
