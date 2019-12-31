@@ -12,6 +12,9 @@ use YYY\FetchApi\Pay\MyInterface\InterfaceEvent;
 use YYY\FetchApi\Pay\MyInterface\InterfacePay;
 use YYY\FetchApi\Pay\MyTrait\Err;
 use YYY\FetchApi\Pay\MyTrait\TraitEvent;
+use YYY\FetchApi\Pay\Util\Md5Util;
+use YYY\FetchApi\Pay\Util\RSA;
+use YYY\FetchApi\Pay\Util\Security;
 
 /**
  *
@@ -34,11 +37,11 @@ class Api implements InterfacePay, InterfaceEvent
     protected $md5Key;   // 密钥，配置。会初始化。仅用于请求并得到响应
     protected $request_herder; // 固定值。会初始化。仅用于请求并得到响应
 
-    protected $third_order_no = ''; // 三方返回的订单号。
+    protected $third_order_no = ''; //
 
 
 
-    protected $amount = 0; // 付款金额，单元元。会初始化。
+    protected $amount = 0; //
 
     /**
      * @var DataPay
@@ -56,19 +59,19 @@ class Api implements InterfacePay, InterfaceEvent
     protected $service_rsa;  // 会初始化。
 
 
-    // 这是响应时返回的。三方订单号。
+    // 这是响应时返回的。
     public function get_third_order_no()
     {
         return $this->third_order_no;
     }
 
-    // 这是响应时返回的。我方订单号。
+    // 这是响应时返回的。
     public function get_my_order_no()
     {
         return $this->dataPay->getLinkId();
     }
 
-    // 这是结算金额
+    //
     public function get_my_settle_amount_fen()
     {
         $amount = $this->dataPay->getSettleAmount();
@@ -95,11 +98,11 @@ class Api implements InterfacePay, InterfaceEvent
         error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
         $this->fetch_result = null;
 
-        $this->url = config('my.api_pay_daikou_url');//请求地址
-        $this->key = Security::create_key(); //请求的16位AES密钥，可随机生成,这是加密请求字符串的密钥，自己定义的。
-        $this->orgNo = config('my.api_pay_daikou_org_no');//机构号
-        $this->merNo = config('my.api_pay_daikou_mer_no');//商户号
-        $this->action = "NocardSmsItem";//3.2.S0105.快捷单笔到账下单 action = NocardSmsItem
+        $this->url = config('fetchapi-pay.api_pay_daikou_url');
+        $this->key = Security::create_key(); //请求的16位AES密钥，
+        $this->orgNo = config('fetchapi-pay.api_pay_daikou_org_no');
+        $this->merNo = config('fetchapi-pay.api_pay_daikou_mer_no');
+        $this->action = "NocardSmsItem";
 
         $this->md5Key = config('my.api_pay_daikou_md5_key');//md5密钥，生成签名时加盐。
 

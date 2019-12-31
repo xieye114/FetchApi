@@ -14,8 +14,8 @@ interface InterfacePay extends InterfaceErr, InterfaceApi
 {
 
     /**
-     * @param RequestData $requestData   包括了扣款卡，结算卡。
-     * @param $amount            转账金额 ，单位元。
+     * @param RequestData $requestData
+     * @param $amount
      * @return mixed
      */
     public function set_request(RequestData $requestData, $amount );
@@ -24,10 +24,10 @@ interface InterfacePay extends InterfaceErr, InterfaceApi
     public function get_third_order_no();
 
 
-    // 这是响应时返回的。我方订单号。
+    // 这是响应时返回的。
     public function get_my_order_no();
 
-    // 这是响应时返回的。结算金额分
+    // 这是响应时返回的。
     public function get_my_settle_amount_fen();
 
 }

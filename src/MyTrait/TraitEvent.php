@@ -55,7 +55,7 @@ trait TraitEvent
 
 
 
-    //请求状态码：0顺利，10欠费，20 其余网络故障
+    //请求状态码：0顺利，10，20 其余网络故障
     public function get_event_request_status()
     {
         return $this->_request_status;
