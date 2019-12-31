@@ -12,10 +12,8 @@ use YYY\FetchApi\Pay\MyInterface\InterfaceEvent;
 use YYY\FetchApi\Pay\MyInterface\InterfacePay;
 use YYY\FetchApi\Pay\MyTrait\Err;
 use YYY\FetchApi\Pay\MyTrait\TraitEvent;
-use YYY\FetchApi\Pay\Util\Http;
 use YYY\FetchApi\Pay\Util\Md5Util;
 use YYY\FetchApi\Pay\Util\RSA;
-use YYY\FetchApi\Pay\Util\Security;
 
 /**
  *
@@ -124,7 +122,7 @@ class Stub implements InterfacePay, InterfaceEvent
 
     public function is_valid(): bool
     {
-        
+
         return true;
 
     }
