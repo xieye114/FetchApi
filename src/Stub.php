@@ -74,7 +74,7 @@ class Stub implements InterfacePay, InterfaceEvent
     public function get_my_settle_amount_fen()
     {
 
-        return $this->dataPay->getAmount();
+        return $this->amount * 100;
     }
 
 
