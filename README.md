@@ -1,2 +1,3 @@
 # uploadfile
-123
+
+php artisan vendor:publish --provider="YYY\FetchApi\Pay\ServiceProvider"
