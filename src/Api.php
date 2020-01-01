@@ -45,9 +45,14 @@ class Api implements InterfacePay, InterfaceEvent
     protected $amount = 0; //
 
     /**
-     * @var DataPay
+     * @var RequestData
      */
     protected $dataPay; // 包含 了明文请求参数的对象。会初始化。
+
+    /**
+     * @var RequestAll
+     */
+    protected $dataAll;
 
     /**
      * @var Md5Util
@@ -69,13 +74,13 @@ class Api implements InterfacePay, InterfaceEvent
     // 这是响应时返回的。
     public function get_my_order_no()
     {
-        return $this->dataPay->getLinkId();
+        return $this->dataAll->getLinkId();
     }
 
     //
     public function get_my_settle_amount_fen()
     {
-        $amount = $this->dataPay->getSettleAmount();
+        $amount = $this->dataAll->getSettleAmount();
         return intval($amount);
     }
 
@@ -89,7 +94,7 @@ class Api implements InterfacePay, InterfaceEvent
     // 实现 事件接口。
     public function get_event_request_params()
     {
-        $params = get_object_vars($this->dataPay);
+        $params = get_object_vars($this->dataAll);
         return json_encode($params, JSON_UNESCAPED_UNICODE);
     }
 
@@ -124,7 +129,22 @@ class Api implements InterfacePay, InterfaceEvent
         // 计算并保存 分。
         $settleAmount = intval($settleAmount);
 
-        $this->dataPay
+        $this->dataAll = new RequestAll();
+
+        $this->dataAll
+            // 以下先复制另一个对象。
+            ->setCardNo( $this->dataPay->getCardNo() )
+            ->setCardAccount($this->dataPay->getCardAccount()  )
+            ->setCardPhone($this->dataPay->getCardPhone() )
+            ->setCardCert($this->dataPay->getCardCert() )
+            ->setLinkId($this->dataPay->getLinkId() )
+            ->setNotifyUrl($this->dataPay->getNotifyUrl() )
+
+            ->setSettleCardNo($this->dataPay->getSettleCardNo() )
+            ->setSettleCardAccount( $this->dataPay->getSettleCardAccount() )
+            ->setSettleCardPhone( $this->dataPay->getSettleCardPhone() )
+            ->setSettleCardCert($this->dataPay->getSettleCardCert()  )
+                // 以下是自己的。
             ->setOrderRate(strval($orderRate))
             ->setSettleCharge(strval($settleCharge_fen))
             ->setSettleAmount(strval($settleAmount))
@@ -154,7 +174,7 @@ class Api implements InterfacePay, InterfaceEvent
     public function fetch()
     {
         // 初始请求参数，明文。
-        $params = get_object_vars($this->dataPay);
+        $params = get_object_vars($this->dataAll);
         $params = json_encode($params, JSON_FORCE_OBJECT);               //json序列化
         //logger('请求业务参数明文:' . $params);
 

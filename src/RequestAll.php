@@ -13,9 +13,17 @@ namespace YYY\FetchApi\Pay;
  * 数据包
  *
  */
-class RequestData
+class RequestAll
 {
+
     public $linkId;
+    public $orderType;
+    public $goodsName;
+    public $amount;
+
+    public $orderRate;
+    public $settleCharge;
+    public $settleAmount;
     public $notifyUrl;
 
 
@@ -45,9 +53,89 @@ class RequestData
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOrderType()
+    {
+        return $this->orderType;
+    }
 
+    public function setOrderType($orderType)
+    {
+        $this->orderType = $orderType;
+        return $this;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getGoodsName()
+    {
+        return $this->goodsName;
+    }
 
+    public function setGoodsName($goodsName)
+    {
+        $this->goodsName = $goodsName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderRate()
+    {
+        return $this->orderRate;
+    }
+
+    public function setOrderRate($orderRate)
+    {
+        $this->orderRate = $orderRate;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSettleCharge()
+    {
+        return $this->settleCharge;
+    }
+
+    public function setSettleCharge($settleCharge)
+    {
+        $this->settleCharge = $settleCharge;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSettleAmount()
+    {
+        return $this->settleAmount;
+    }
+
+    public function setSettleAmount($settleAmount)
+    {
+        $this->settleAmount = $settleAmount;
+        return $this;
+    }
 
     /**
      * @return mixed
