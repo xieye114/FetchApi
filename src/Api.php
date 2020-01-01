@@ -125,7 +125,8 @@ class Api implements InterfacePay, InterfaceEvent
         $settleCharge_fen = config('fetchapi-pay.api_pay_daikou_settle_charge'); // 单位分
 
         $amount_yuan = $this->amount;
-        $settleAmount = $amount_yuan * 100 - ($amount_yuan * 100 * $orderRate / 100) - $settleCharge_fen;
+        $settleAmount = $amount_yuan * 100 -
+            round($amount_yuan  * $orderRate ) - $settleCharge_fen;
         // 计算并保存 分。
         $settleAmount = intval($settleAmount);
 
