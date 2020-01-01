@@ -105,7 +105,7 @@ class Api implements InterfacePay, InterfaceEvent
         $this->merNo = config('fetchapi-pay.api_pay_daikou_mer_no');
         $this->action = "NocardSmsItem";
 
-        $this->md5Key = config('my.api_pay_daikou_md5_key');//md5密钥，生成签名时加盐。
+        $this->md5Key = config('fetchapi-pay.api_pay_daikou_md5_key');//md5密钥，生成签名时加盐。
 
         $this->service_md5Util = new Md5Util();
         $this->service_rsa = new RSA(config_path('private.pem'));
@@ -116,8 +116,8 @@ class Api implements InterfacePay, InterfaceEvent
         ];
 
 
-        $orderRate = config('my.api_pay_daikou_settle_rate');
-        $settleCharge_fen = config('my.api_pay_daikou_settle_charge'); // 单位分
+        $orderRate = config('fetchapi-pay.api_pay_daikou_settle_rate');
+        $settleCharge_fen = config('fetchapi-pay.api_pay_daikou_settle_charge'); // 单位分
 
         $amount_yuan = $this->amount;
         $settleAmount = $amount_yuan * 100 - ($amount_yuan * 100 * $orderRate / 100) - $settleCharge_fen;
