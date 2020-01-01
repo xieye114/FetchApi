@@ -130,8 +130,8 @@ class Api implements InterfacePay, InterfaceEvent
             ->setSettleAmount(strval($settleAmount))
             ->setOrderType(10)
             ->setGoodsName('测试商品')
-            ->setAmount($amount_yuan * 100)
-            ->setNotifyUrl(route('callback_withholding'));
+            ->setAmount($amount_yuan * 100);
+
 
         return $this;
     }
