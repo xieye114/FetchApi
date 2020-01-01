@@ -21,6 +21,12 @@
         "psr-4": {
             "YYY\\FetchApi\\Pay\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YYY\\FetchApi\\Pay\\ServiceProvider"
+            ]
+        }
     }
-
 }
