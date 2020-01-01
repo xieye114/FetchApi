@@ -38,7 +38,7 @@ class ServiceProvider extends LaravelServiceProvider {
         if (method_exists($this, 'publishes')) {
 
             $this->publishes([
-                __DIR__.'/../../config/fetchapi-pay.php' => $this->config_path('fetchapi-pay.php'),
+                __DIR__.'/config/fetchapi-pay.php' => $this->config_path('fetchapi-pay.php'),
             ]);
 
         }
