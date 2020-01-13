@@ -80,7 +80,7 @@ class ApiNew implements InterfacePay, InterfaceEvent
     //
     public function get_my_settle_amount_fen()
     {
-        $amount = $this->dataAll->getSettleAmount();
+        $amount = $this->dataAll->getAmount();
         return intval($amount);
     }
 
